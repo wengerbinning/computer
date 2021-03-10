@@ -1,7 +1,5 @@
 # Linux的系统管理
 
-[//]: # (__author__ = "Clark Aaron")
-
 Linux的系统管理是Linux经常使用的管理命令,包括账户管理、文件管理、设备管理、进程管理、服务管理以及其他的系统管理。
 
 ## 账户管理
@@ -234,17 +232,21 @@ Linux的系统管理是Linux经常使用的管理命令,包括账户管理、文
 
   ```shell
   tar -cvf <*.tar> <filename>                 # 仅打包文件
-  tar -zcvf <*.tar.gz> <filename>             # 以gzip方式压缩并打包
-  tar -jcvf <*.tar.bz2> <filename>            # 以bzip2方式压缩并打包
+  tar -czvf <*.tar.gz> <filename>             # 以gzip方式压缩并打包
+  tar -cjvf <*.tar.bz2> <filename>            # 以bzip2方式压缩并打包
   ```
+
+  > Note: -c参数为打包文件，-z参数是以gzip的方式压缩文件，-j参数是以bzip2的方式压缩文件，-v参数是显示过程，-f <package name>为指定包文件。
 
 * 【功能】解压文件:
 
   ```shell
   tar -xvf <*.tar>  <path>                    # 解包
-  tar -zxvf <*.tar.gz> <path>                 # 以gzip方式解压并解包
-  tar -jxvf <*.tar.bz2> <path>                # 以bzip2方式解压
+  tar -xzvf <*.tar.gz> <path>                 # 以gzip方式解压并解包
+  tar -xjvf <*.tar.bz2> <path>                # 以bzip2方式解压
   ```
+
+  > Note: -x为解压文件。
   
 ## 设备管理
 
@@ -259,6 +261,10 @@ Linux的系统管理是Linux经常使用的管理命令,包括账户管理、文
   df
   #　查看文件内存信息。
   du
+  # 磁盘sda分区。
+  fdisk /dev/sda
+  # 分区完成后执行。
+  partprobe
   ```
 
   > Note：开机时自动执行`etc/re.d/re.local`脚本文件。
@@ -283,6 +289,14 @@ Linux的系统管理是Linux经常使用的管理命令,包括账户管理、文
 
   ```shell
   fdisk
+  ```
+
+* 【功能】格式化磁盘：
+  
+  ```shell
+  mkfs
+  # 格式化NTFS格式sda1分区。
+  mkfs.ntfs -L <Label> /dev/sda1
   ```
 
 * 【文件】自动挂载的配置文件`etc/fstab`：
